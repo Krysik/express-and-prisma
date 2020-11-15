@@ -1,28 +1,24 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
-model Book {
-  id Int @id @default(autoincrement())
-  title String
-  isbn String
+model books {
+  id              Int     @id @default(autoincrement())
+  title           String
+  isbn            String
   availableAmount Int
-  author Author @relation(fields: [authorId], references: [id]) // this field does not exist int the database
-  authorId Int
+  authorId        Int
+  author          authors @relation(fields: [authorId], references: [id])
 }
 
-model Author {
-  id Int @id @default(autoincrement())
-  name String
+model authors {
+  id      Int     @id @default(autoincrement())
+  name    String
   surname String
+  books   books[]
 }
-
-
