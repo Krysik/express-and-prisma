@@ -5,6 +5,13 @@
     "strict": true,
     "lib": ["esnext"],
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-  }
+    "baseUrl": "src",
+    "paths": {
+      "*": ["./*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }

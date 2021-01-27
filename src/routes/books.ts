@@ -1,5 +1,5 @@
 import express from 'express';
-import prisma from '../prisma';
+import prisma from 'services/prisma';
 
 const router = express.Router();
 
@@ -9,8 +9,6 @@ router.get('', async (_req, res) => {
     res.status(200).json(books);
   } catch (err) {
     res.json({ok: false, message: err.message})
-  } finally {
-    await prisma.$disconnect();
   }
 });
 
@@ -20,6 +18,9 @@ router.post('', async (req, res) => {
     if (book) {
       const result = await prisma.books.create({
         data: book,
+        include: {
+          author: false
+        }
       })
       res.status(201).json(result);
     } else {
@@ -27,8 +28,6 @@ router.post('', async (req, res) => {
     }
   } catch (err) {
     res.json({ ok: false, message: err.message })
-  } finally {
-    await prisma.$disconnect();
   }
 })
 
@@ -43,8 +42,6 @@ router.put('/:id', async (req, res) => {
     res.status(200).json({ ok: true, result })
   } catch (err) {
     res.json({ok: false, message: err.message})
-  } finally {
-    await prisma.$disconnect();
   }
 })
 
@@ -57,8 +54,6 @@ router.delete('/:id', async (req, res) => {
     res.status(200).json({ ok: true, result })
   } catch (err) {
     res.json({ ok: false, message: err.message })
-  } finally {
-    await prisma.$disconnect();
   }
 })
 
