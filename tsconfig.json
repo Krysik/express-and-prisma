@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     "sourceMap": true,
+    "target": "ES5",
     "outDir": "dist",
     "strict": true,
     "lib": ["esnext"],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
     "baseUrl": "src",
     "paths": {
       "*": ["./*"]
